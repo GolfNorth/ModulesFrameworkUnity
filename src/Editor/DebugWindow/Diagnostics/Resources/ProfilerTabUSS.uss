@@ -1,0 +1,70 @@
+﻿.modules--profiler-tab {
+    height: 100%;
+    padding-top: 40px;
+}
+
+.modules--profiler-tab--toolbar {
+    margin: 0 8px;
+    padding: 6px 4px;
+    min-height: 30px;
+    border-bottom-width: 1px;
+    border-bottom-color: #555555;
+    align-items: center;
+}
+
+.modules--profiler-tab--header {
+    flex-direction: row;
+    margin: 6px 8px 2px 8px;
+}
+
+.modules--profiler-tab--table {
+    flex-grow: 1;
+    margin: 0 8px 8px 8px;
+}
+
+.modules--profiler-tab--row {
+    flex-direction: row;
+    padding: 2px 0;
+}
+
+.modules--profiler-tab--cell--name  { width: 320px; }
+.modules--profiler-tab--cell--calls { width: 70px;  -unity-text-align: middle-right; }
+.modules--profiler-tab--cell--avg   { width: 90px;  -unity-text-align: middle-right; }
+.modules--profiler-tab--cell--last  { width: 90px;  -unity-text-align: middle-right; }
+.modules--profiler-tab--cell--min   { width: 100px; -unity-text-align: middle-right; }
+.modules--profiler-tab--cell--max   { width: 100px; -unity-text-align: middle-right; }
+.modules--profiler-tab--cell--alloc { width: 130px; -unity-text-align: middle-right; }
+
+.modules--profiler-tab--toolbar .unity-toolbar-search-field {
+    flex-grow: 1;
+    min-width: 260px;
+    margin-right: 8px;
+}
+
+.modules--profiler-tab--toolbar .unity-toolbar-menu {
+    width: 130px;
+    flex-shrink: 0;
+}
+
+.modules--profiler-tab--toolbar .unity-toolbar-spacer {
+    flex-grow: 0;
+}
+
+.modules--profiler-tab--search {
+    flex-grow: 1;
+    min-width: 260px;
+    margin-right: 8px;
+}
+
+.modules--profiler-tab--sort {
+    width: 130px;
+    flex-shrink: 0;
+}
+
+.modules--profiler-tab--info {
+    margin-top: 4px;
+    margin-left: 8px;
+    color: #bbbbbb;
+    -unity-font-style: italic;
+    font-size: 11px;
+}

@@ -5,6 +5,7 @@
         Undefined,
         Modules,
         OneData,
-        Entities
+        Entities,
+        Profiler
     }
 }

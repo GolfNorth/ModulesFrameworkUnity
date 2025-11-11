@@ -1,8 +1,3 @@
-using System;
-using System.Linq;
-using ModulesFramework;
-using ModulesFramework.Modules;
-using ModulesFrameworkUnity.Debug;
 using ModulesFrameworkUnity.Debug.Entities;
 using ModulesFrameworkUnity.Debug.Utils;
 using ModulesFrameworkUnity.DebugWindow.Data;
@@ -10,11 +5,12 @@ using ModulesFrameworkUnity.DebugWindow.Modules;
 using ModulesFrameworkUnity.DebugWindow.Modules.Data;
 using ModulesFrameworkUnity.DebugWindow.OneDataTab;
 using ModulesFrameworkUnity.Settings;
-using ModulesFrameworkUnity.Utils;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using UnityEngine.UIElements;
+#if MODULES_PROFILER
+using ModulesFrameworkUnity.Debug.Diagnostics;
+#endif
 
 namespace ModulesFrameworkUnity.DebugWindow
 {
@@ -32,6 +28,11 @@ namespace ModulesFrameworkUnity.DebugWindow
 
         [SerializeField]
         private ModulesTabMode _modulesTabMode;
+
+#if MODULES_PROFILER
+        [SerializeField]
+        private ProfilerTab _profilerTab;
+#endif
 
         [SerializeField]
         private DebugTabType _currentTab;
@@ -70,6 +71,14 @@ namespace ModulesFrameworkUnity.DebugWindow
             _entitiesTab ??= new EntitiesTab();
             rootVisualElement.Add(entitiesRoot);
             _entitiesTab.Draw(entitiesRoot, debugSettings);
+
+#if MODULES_PROFILER
+            var profilerRoot = new VisualElement();
+            _profilerTab ??= new ProfilerTab();
+            rootVisualElement.Add(profilerRoot);
+            _profilerTab.Draw(profilerRoot);
+            _profilerTab.Hide();
+#endif
 
             _tabs ??= new DebugWindowTabs();
             _tabs.Draw(rootVisualElement);
@@ -115,17 +124,34 @@ namespace ModulesFrameworkUnity.DebugWindow
             switch (type)
             {
                 case DebugTabType.Entities:
+#if MODULES_PROFILER
+                    _profilerTab.Hide();
+#endif
                     _modulesTab.Hide();
                     _oneDataTab.Hide();
                     _entitiesTab.Show();
                     break;
                 case DebugTabType.OneData:
+#if MODULES_PROFILER
+                    _profilerTab.Hide();
+#endif
                     _modulesTab.Hide();
                     _oneDataTab.Show();
                     _entitiesTab.Hide();
                     break;
+#if MODULES_PROFILER
+                case DebugTabType.Profiler:
+                    _modulesTab.Hide();
+                    _oneDataTab.Hide();
+                    _entitiesTab.Hide();
+                    _profilerTab.Show();
+                    break;
+#endif
                 case DebugTabType.Modules:
                 default:
+#if MODULES_PROFILER
+                    _profilerTab.Hide();
+#endif
                     _modulesTab.Show();
                     _oneDataTab.Hide();
                     _entitiesTab.Hide();

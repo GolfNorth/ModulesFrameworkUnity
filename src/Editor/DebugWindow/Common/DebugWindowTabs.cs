@@ -17,6 +17,7 @@ namespace ModulesFrameworkUnity.DebugWindow
             CreateModulesBtn(tabs);
             CreateOneDataBtn(tabs);
             CreateEntitiesBtn(tabs);
+            CreateProfilerBtn(tabs);
             CreateEventBtn(tabs);
             root.Add(tabs);
         }
@@ -49,6 +50,18 @@ namespace ModulesFrameworkUnity.DebugWindow
             };
             entitiesButton.clicked += () => SwitchTab?.Invoke(DebugTabType.Entities);
             tabs.Add(entitiesButton);
+        }
+
+        private void CreateProfilerBtn(Box tabs)
+        {
+#if MODULES_PROFILER
+            var profilerButton = new Button
+            {
+                text = "Profiler"
+            };
+            profilerButton.clicked += () => SwitchTab?.Invoke(DebugTabType.Profiler);
+            tabs.Add(profilerButton);
+#endif
         }
 
         private void CreateEventBtn(Box tabs)
